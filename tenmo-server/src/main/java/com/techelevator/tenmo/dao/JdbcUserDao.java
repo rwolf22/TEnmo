@@ -1,6 +1,8 @@
 package com.techelevator.tenmo.dao;
 
+import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.security.AccountNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -30,7 +32,7 @@ public class JdbcUserDao implements UserDao {
             return id;
         } else {
             return -1;
-    }
+        }
     }
 
     @Override
@@ -88,4 +90,6 @@ public class JdbcUserDao implements UserDao {
         user.setAuthorities("USER");
         return user;
     }
+
+
 }
