@@ -12,17 +12,21 @@ public class JdbcTransferDao implements TransferDao{
 
     private JdbcTemplate jdbcTemplate;
 
+    public JdbcTransferDao() {
+    }
+
     public JdbcTransferDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public boolean create(int transferType, int transferStatus, int fromAccount, int toAccount, double amount) {
+    public boolean create(Transfer transfer) {
         String sql = "INSERT INTO transfers (transfer_type_id, transfer_status_id, account_from, account_to, amount) " +
-                "VALUES (?, ?, ?, ?, ?);";
+                "VALUES (?, ?, ?, ?, ?)" +
+                "RETURNING transfer_id;";
         int newTransferId;
         try {
-            newTransferId = jdbcTemplate.queryForObject(sql, Integer.class, transferType, transferStatus, fromAccount, toAccount, amount);
+            newTransferId = jdbcTemplate.queryForObject(sql, Integer.class, transfer.getTransferTypeId(), transfer.getTransferStatusId(), transfer.getAccountFrom(), transfer.getAccountTo(), transfer.getAmount());
         } catch (DataAccessException e) {
             return false;
         }
