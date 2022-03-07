@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface TransferDao {
 
-    boolean create(Transfer transfer);
+    Transfer create(Transfer transfer);
 
-    boolean completeTransfer(int transferId);
+    Transfer approveTransfer(Transfer transfer);
 
     List<Transfer> list(int accountId);
 

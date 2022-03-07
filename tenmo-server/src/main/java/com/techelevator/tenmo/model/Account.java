@@ -1,7 +1,10 @@
 package com.techelevator.tenmo.model;
 
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotNull;
 
+@Component
 public class Account {
 
     @NotNull
